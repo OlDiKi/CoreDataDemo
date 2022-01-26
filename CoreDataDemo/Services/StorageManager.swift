@@ -25,11 +25,9 @@ lazy var persistentContainer: NSPersistentContainer = {
     })
     return container
 }()
-
-    private var context: NSManagedObjectContext {
-        persistentContainer.viewContext
-    }
-        
+   
+    lazy private var context = persistentContainer.viewContext
+    
 // MARK: - Core Data Saving support
 
 func saveContext () {
@@ -44,14 +42,14 @@ func saveContext () {
 }
 
 //MARK: - Private Methods
-     func fetchData() -> [Task] {
-        let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
+    func fetchData(completion: ([Task]) -> Void) {
+        let fetchRequest = Task.fetchRequest()
         
         do {
-            return try context.fetch(fetchRequest)
+            let taskList = try persistentContainer.viewContext.fetch(fetchRequest)
+            completion(taskList)
         } catch let error {
             print("Failed to fetch data", error)
-            return []
         }
     }
     
