@@ -102,7 +102,7 @@ extension TaskListViewController {
         deleteAction.image = UIImage(systemName: "trash")
         
         let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, sourceView, completionHandler) in
-            self.showEditAlert(with: "Edit", and: "Please edit the task", selectedRow: indexPath.row)
+            self.showEditAlert(with: "Edit", and: "Please edit Task", selectedRow: indexPath.row)
             completionHandler(true)
         }
         
